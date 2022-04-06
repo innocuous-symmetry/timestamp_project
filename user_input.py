@@ -1,17 +1,25 @@
 from database import *
+from datetime import datetime
 
 user_prompt = """
 Welcome to the personal time stamp program.
 This program is intended to help you keep track of your work hours on personal projects.
 
 Please choose from the following options:
-1) Select all timestamps (option: limit number of results)
-2) Find a timestamp by date range
-3) Calculate total hours for the week
-4) Calculate complete sum of hours
+1) Insert a new timestamp
+2) Select all timestamps (option: limit number of results)
+3) Find a timestamp by date range
+4) Calculate total hours for the week
+5) Calculate complete sum of hours
 """
 
+# Inner functions detailed below:
 def handle_first_option():
+    current_time = datetime.now()
+    print(f'Current time: {str(current_time)}')
+    print("Creating a new timestamp. Enter the following details:")
+
+def handle_second_option():
     limit_results = input("Returning all timestamps. Limit results? y/n \n")
     if limit_results == 'n':
         output = get_all_stamps()
@@ -57,16 +65,10 @@ def handle_first_option():
     
     elif limit_results != 'y' or limit_results != 'n':
         print("Please provide a valid selection.")
-        handle_first_option()
+        handle_second_option()
 
-
-def handle_second_option():
-    pass
 
 def handle_third_option():
-    pass
-
-def handle_fourth_option():
     pass
 
 
@@ -89,10 +91,11 @@ def parse_input():
         print(f'You selected {response}. Working...')
 
 
-
     if response == 1:
         handle_first_option()
     elif response == 2:
+        handle_second_option()
+    elif response == 3:
         pass
     elif response == 3:
         pass

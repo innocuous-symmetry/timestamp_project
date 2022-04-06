@@ -1,5 +1,6 @@
 import sqlite3
 from user_input import *
+from datetime import datetime
 
 # establish a connection to a .db file and create a cursor object
 con = sqlite3.connect('data.db')
@@ -24,20 +25,19 @@ cur.executemany("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", timestamp_list)
 # 3) Calculate total hours for the week
 # 4) Calculate complete sum of hours
 
+def create_new_stamp():
+    current_time = ''
+
 def get_all_stamps():
     return cur.execute("SELECT * FROM TIMESTAMPS;")
 
 
 def get_number_of_stamps(input):
     table_rows = []
-    table_values = cur.execute("SELECT * FROM TIMESTAMPS;")
+    for row in cur.execute("SELECT * FROM TIMESTAMPS;"):
+        table_rows.append(row)
 
-    iterator = 0
-    while (iterator < input):
-        table_rows.append(table_values[iterator])
-        iterator += 1
-
-    return table_rows
+    return table_rows[:input]
 
 
 def get_table_length():

@@ -8,10 +8,9 @@ This program is intended to help you keep track of your work hours on personal p
 Please choose from the following options:
 1) Insert a new timestamp
 2) Select all timestamps (option: limit number of results)
-3) Find a timestamp by date range
+3) Find a timestamp by session id
 4) Calculate total hours for the week
 5) Calculate complete sum of hours
-
 """
 
 # Inner functions detailed below:
@@ -32,6 +31,9 @@ def handle_first_option():
             handle_first_option()
         elif confirmation == 'y':
             create_new_stamp(time_of_stamp, name, purpose)
+            session_id = get_created_id(time_of_stamp)
+            for data in session_id:
+                print(f'Session id: {data[0]}')
             new_selection = input("Data entered. Make another selection? y/n ")
             if new_selection == 'y':
                 parse_input()
@@ -105,7 +107,9 @@ def handle_second_option():
 
 
 def handle_third_option():
-    pass
+    stamp = datetime.now()
+    array = test_select_new(stamp, 'mikayla', 'not python')
+    print(array)
 
 def __admin__():
     print("ADMIN PORTAL")
@@ -122,8 +126,7 @@ def __admin__():
     if int(admin_prompt) == 1:
         print("Deleting all rows...")
         delete_all_rows()
-        print("All rows deleted. Returning...")
-        parse_input()
+        print("All rows deleted. Terminating program:")
     elif int(admin_prompt) == 2:
         print("Drop table. Confirm?")
     elif int(admin_prompt) == 3:
@@ -159,10 +162,10 @@ def parse_input():
     elif response == 2:
         handle_second_option()
     elif response == 3:
-        pass
-    elif response == 3:
-        pass
+        handle_third_option()
     elif response == 4:
+        pass
+    elif response == 5:
         pass
     elif response == 90909:
         __admin__()

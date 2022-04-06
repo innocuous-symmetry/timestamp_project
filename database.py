@@ -16,6 +16,9 @@ cur.execute("CREATE TABLE IF NOT EXISTS USERS (id INTEGER PRIMARY KEY, name STRI
 # 3) Calculate total hours for the week
 # 4) Calculate complete sum of hours
 
+def get_created_id(timestamp):
+    return cur.execute("SELECT * FROM TIMESTAMPS WHERE time_in=:stamp", {"stamp": timestamp})
+
 def create_new_stamp(timestamp, name, purpose):
     to_insert = (timestamp, name, purpose)
     cur.execute("INSERT INTO TIMESTAMPS (time_in, name, purpose) VALUES (?, ?, ?)", to_insert)

@@ -10,6 +10,7 @@ Please choose from the following options:
 3) Find a timestamp by date range
 4) Calculate total hours for the week
 5) Calculate complete sum of hours
+
 """
 
 # Inner functions detailed below:
@@ -100,6 +101,33 @@ def handle_second_option():
 def handle_third_option():
     pass
 
+def __admin__():
+    print("ADMIN PORTAL")
+    print("Choose from additional actions below:")
+    print("""
+    1) Delete all rows from table (table and schema will persist)
+    2) Drop table (database will reinitialize on next render)
+    3) Backup data from SQLite file.
+
+    Take care, some actions will permanently delete all data.\n
+    """)
+    admin_prompt = input("Your response: ")
+
+    if int(admin_prompt) == 1:
+        print("Deleting all rows...")
+        delete_all_rows()
+        print("All rows deleted. Returning...")
+        parse_input()
+    elif int(admin_prompt) == 2:
+        print("Drop table. Confirm?")
+    elif int(admin_prompt) == 3:
+        print("Back up all SQLite data.")
+    else:
+        print("Invalid input.")
+
+
+
+# Dialogue tree for top-level path handling
 
 def parse_input():
     print(user_prompt)
@@ -130,6 +158,8 @@ def parse_input():
         pass
     elif response == 4:
         pass
+    elif response == 871:
+        __admin__()
     else:
         print("Please provide a valid selection.")
         parse_input()

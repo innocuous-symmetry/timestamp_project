@@ -12,12 +12,13 @@ cur.execute("CREATE TABLE IF NOT EXISTS USERS (id INTEGER PRIMARY KEY, name STRI
 
 # declare and insert some initial values
 timestamp_list = [
-    (1, '1pm', 'null', 'Mikayla', 'work on project'),
-    (2, '9pm', '11pm', 'not Mikayla', 'work on project'),
-    (3, '8am', '5pm', 'someone else', 'debugging')
+    ('Mikayla', 'work on project'),
+    ('not Mikayla', 'work on project'),
+    ('someone else', 'debugging')
 ]
 
-cur.executemany("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", timestamp_list)
+cur.executemany("INSERT INTO TIMESTAMPS (name, purpose) VALUES (?, ?)", timestamp_list)
+con.commit()
 
 # Functions to define:
 # 1) Select all timestamps
@@ -26,8 +27,9 @@ cur.executemany("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", timestamp_list)
 # 4) Calculate complete sum of hours
 
 def create_new_stamp(timestamp, name, purpose):
-    to_insert = (999, timestamp, 'null', name, purpose)
-    cur.execute("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", to_insert)
+    to_insert = (timestamp, name, purpose)
+    cur.execute("INSERT INTO TIMESTAMPS (time_in, name, purpose) VALUES (?, ?, ?)", to_insert)
+    con.commit()
 
 def get_all_stamps():
     return cur.execute("SELECT * FROM TIMESTAMPS;")
@@ -56,3 +58,7 @@ def get_weekly_hours():
 
 def get_all_hours():
     pass
+
+
+def delete_all_rows():
+    cur.executemany("DELETE * FROM TIMESTAMPS;")

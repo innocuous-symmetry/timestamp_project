@@ -1,5 +1,4 @@
 import sqlite3
-from typing import ParamSpecArgs
 from user_input import *
 
 # establish a connection to a .db file and create a cursor object
@@ -19,26 +18,6 @@ timestamp_list = [
 
 cur.executemany("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", timestamp_list)
 
-
-"""
-
-# The below logic for testing initial values are inserted,
-# are able to be queried,
-# and are accurately represented in the table.
-
-# query table below:
-table_rows = []
-for row in cur.execute("SELECT * FROM TIMESTAMPS;"):
-    # print each result
-    print(row)
-    # store each result individually in the list above
-    table_rows.append(row)
-
-# find COUNT(*) for the table
-print(len(table_rows))
-
-"""
-
 # Functions to define:
 # 1) Select all timestamps
 # 2) Find a timestamp by date range
@@ -46,7 +25,19 @@ print(len(table_rows))
 # 4) Calculate complete sum of hours
 
 def get_all_stamps():
-    pass
+    return cur.execute("SELECT * FROM TIMESTAMPS;")
+
+def get_number_of_stamps(input):
+    table_rows = []
+    for row in cur.execute("SELECT * FROM TIMESTAMPS;"):
+        table_rows.append(row)
+
+
+def get_table_length():
+    table_rows = []
+    for row in cur.execute("SELECT * FROM TIMESTAMPS;"):
+        table_rows.append(row)
+    return len(table_rows)
 
 def get_stamp_by_date():
     pass

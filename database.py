@@ -1,4 +1,5 @@
 import sqlite3
+from typing import ParamSpecArgs
 from user_input import *
 
 # establish a connection to a .db file and create a cursor object
@@ -38,4 +39,20 @@ print(len(table_rows))
 
 """
 
-parse_input()
+# Functions to define:
+# 1) Select all timestamps
+# 2) Find a timestamp by date range
+# 3) Calculate total hours for the week
+# 4) Calculate complete sum of hours
+
+def get_all_stamps():
+    pass
+
+def get_stamp_by_date():
+    pass
+
+def get_weekly_hours():
+    pass
+
+def get_all_hours():
+    pass

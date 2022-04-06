@@ -13,4 +13,4 @@ def parse_input():
     print(user_prompt)
     response = input("Enter your selection: ")
 
-    print()
+    print(f'You selected {response}. Working...')

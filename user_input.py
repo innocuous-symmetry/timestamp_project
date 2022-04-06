@@ -1,4 +1,5 @@
 from database import *
+from datetime import *
 
 user_prompt = """
 Welcome to the personal time stamp program.
@@ -15,10 +16,10 @@ Please choose from the following options:
 
 # Inner functions detailed below:
 def handle_first_option():
-    time_of_stamp = datetime.now()
     in_out = input("Punching in or out? i/o \n")
 
     if in_out == 'i':
+        time_of_stamp = datetime.now()
         print("Creating new timestamp and punching in!")
         print("Please enter the following details:")
         name = input("Your name: ")
@@ -43,7 +44,12 @@ def handle_first_option():
             print("Invalid input.")
             handle_first_option()
     elif in_out == 'o':
-        print("Punching out.")
+        time_of_stamp = datetime.now()
+        print("Preparing to punch out.")
+        session = input("Please provide your session ID." )
+        punch_out(time_of_stamp, session)
+        print("Punch out successful. Returning...")
+        parse_input()
     else:
         print("Invalid input. Please try again:")
         handle_first_option()

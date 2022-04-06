@@ -61,4 +61,5 @@ def get_all_hours():
 
 
 def delete_all_rows():
-    cur.executemany("DELETE * FROM TIMESTAMPS;")
+    cur.execute("DELETE FROM TIMESTAMPS")
+    con.commit()

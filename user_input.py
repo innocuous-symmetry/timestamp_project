@@ -158,7 +158,7 @@ def parse_input():
         pass
     elif response == 4:
         pass
-    elif response == 871:
+    elif response == 90909:
         __admin__()
     else:
         print("Please provide a valid selection.")

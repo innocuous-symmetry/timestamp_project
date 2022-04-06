@@ -25,8 +25,9 @@ cur.executemany("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", timestamp_list)
 # 3) Calculate total hours for the week
 # 4) Calculate complete sum of hours
 
-def create_new_stamp():
-    current_time = ''
+def create_new_stamp(timestamp, name, purpose):
+    to_insert = (999, timestamp, 'null', name, purpose)
+    cur.execute("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", to_insert)
 
 def get_all_stamps():
     return cur.execute("SELECT * FROM TIMESTAMPS;")

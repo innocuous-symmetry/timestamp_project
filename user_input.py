@@ -1,5 +1,4 @@
 from database import *
-from datetime import datetime
 
 user_prompt = """
 Welcome to the personal time stamp program.
@@ -15,9 +14,39 @@ Please choose from the following options:
 
 # Inner functions detailed below:
 def handle_first_option():
-    current_time = datetime.now()
-    print(f'Current time: {str(current_time)}')
-    print("Creating a new timestamp. Enter the following details:")
+    time_of_stamp = datetime.now()
+    in_out = input("Punching in or out? i/o \n")
+
+    if in_out == 'i':
+        print("Creating new timestamp and punching in!")
+        print("Please enter the following details:")
+        name = input("Your name: ")
+        purpose = input("Current task: ")
+
+        print("\nPlease confirm your details:")
+        confirmation = input(f'{name} clocking in at {time_of_stamp} for {purpose}. Confirm? y/n ')
+
+        if confirmation == 'n':
+            handle_first_option()
+        elif confirmation == 'y':
+            create_new_stamp(time_of_stamp, name, purpose)
+            new_selection = input("Data entered. Make another selection? y/n ")
+            if new_selection == 'y':
+                parse_input()
+            elif new_selection == 'n':
+                pass
+            else:
+                print("Invalid input. Exiting...")
+                pass
+        else:
+            print("Invalid input.")
+            handle_first_option()
+    elif in_out == 'o':
+        print("Punching out.")
+    else:
+        print("Invalid input. Please try again:")
+        handle_first_option()
+
 
 def handle_second_option():
     limit_results = input("Returning all timestamps. Limit results? y/n \n")

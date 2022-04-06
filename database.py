@@ -27,10 +27,17 @@ cur.executemany("INSERT INTO TIMESTAMPS VALUES (?, ?, ?, ?, ?)", timestamp_list)
 def get_all_stamps():
     return cur.execute("SELECT * FROM TIMESTAMPS;")
 
+
 def get_number_of_stamps(input):
     table_rows = []
-    for row in cur.execute("SELECT * FROM TIMESTAMPS;"):
-        table_rows.append(row)
+    table_values = cur.execute("SELECT * FROM TIMESTAMPS;")
+
+    iterator = 0
+    while (iterator < input):
+        table_rows.append(table_values[iterator])
+        iterator += 1
+
+    return table_rows
 
 
 def get_table_length():
@@ -38,6 +45,7 @@ def get_table_length():
     for row in cur.execute("SELECT * FROM TIMESTAMPS;"):
         table_rows.append(row)
     return len(table_rows)
+
 
 def get_stamp_by_date():
     pass

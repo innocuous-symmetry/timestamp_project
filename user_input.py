@@ -22,6 +22,7 @@ def handle_first_option():
         def find_row_limit():
             user_limit = input("How many rows? \n")
             table_length = get_table_length()
+
             try:
                 user_limit = int(user_limit)
             except ValueError:
@@ -31,15 +32,43 @@ def handle_first_option():
                 print("An unknown error occurred. Please try again.")
                 find_row_limit()
             
-            if type(user_limit) is int:
-                print(f'Returning first {user_limit} rows of data...')
-                
-        
+            if (user_limit > table_length):
+                print("Provided input is larger than available rows in table.")
+                print("Printing all rows...")
+                output = get_all_stamps()
+                for row in output:
+                    print(row)
+            else:
+                table_rows = get_number_of_stamps(user_limit)
+                for row in table_rows:
+                    print(row)
+            
+            another_selection = input("Make another selection? y/n \n")
+
+            if another_selection == 'y':
+                parse_input()
+            elif another_selection == 'n':
+                pass
+            else:
+                print("Make another selection:")
+                parse_input()
+
         find_row_limit()
     
     elif limit_results != 'y' or limit_results != 'n':
         print("Please provide a valid selection.")
         handle_first_option()
+
+
+def handle_second_option():
+    pass
+
+def handle_third_option():
+    pass
+
+def handle_fourth_option():
+    pass
+
 
 def parse_input():
     print(user_prompt)
@@ -54,8 +83,12 @@ def parse_input():
         print("Please provide a valid input.")
         parse_input()
 
+
+
     if type(response) == int:
         print(f'You selected {response}. Working...')
+
+
 
     if response == 1:
         handle_first_option()
@@ -66,4 +99,5 @@ def parse_input():
     elif response == 4:
         pass
     else:
-        pass
+        print("Please provide a valid selection.")
+        parse_input()

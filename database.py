@@ -1,6 +1,6 @@
 import sqlite3
 from user_input import *
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # establish a connection to a .db file and create a cursor object
 con = sqlite3.connect('data.db')
@@ -50,12 +50,14 @@ def get_table_length():
         table_rows.append(row)
     return len(table_rows)
 
-
-def get_stamp_by_date():
-    pass
-
 def get_weekly_hours():
-    pass
+    current_time = datetime.now()
+    minus_week = current_time - timedelta(days = 7)
+    
+    return cur.execute("""
+    SELECT time_in, time_out FROM TIMESTAMPS
+    WHERE time_in>:minus_week
+    """, {"minus_week": minus_week})
 
 def get_all_hours():
     pass
